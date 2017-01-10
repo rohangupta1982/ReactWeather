@@ -29,6 +29,10 @@ var {Link, IndexLink} = require('react-router');
 
 //Third
 var Navigator = React.createClass({
+    getWeather: function(e) {
+        e.preventDefault();
+        alert(this.refs.location.value);
+    },
     render: function() {
         return(
             <div className="top-bar">
@@ -47,8 +51,15 @@ var Navigator = React.createClass({
                     </ul>
                 </div>
                 <div className="top-bar-right">
-                    <form>
-                        
+                    <form onSubmit={this.getWeather}>
+                        <ul className="menu">
+                            <li>
+                                <input type="text" ref="location" placeholder="Enter city name"/>
+                            </li>
+                            <li>
+                                <button className="button">Get Weather</button>
+                            </li>
+                        </ul>
                     </form>
                 </div>
             </div>
