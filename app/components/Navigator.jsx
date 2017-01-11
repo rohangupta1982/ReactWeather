@@ -29,9 +29,8 @@ var {Link, IndexLink} = require('react-router');
 
 //Third
 var Navigator = React.createClass({
-    getWeather: function(e) {
+    login: function(e) {
         e.preventDefault();
-        alert(this.refs.location.value);
     },
     render: function() {
         return(
@@ -66,5 +65,7 @@ var Navigator = React.createClass({
         );
     }
 });
+
+
 
 module.exports = Navigator;

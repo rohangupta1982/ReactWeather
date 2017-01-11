@@ -13,8 +13,9 @@ var React = require('react');
 var WeatherMessage = (props) => {
     return(
         <div>
-            <h3 className='text-center'>{props.message}</h3>
+            <p className="text-center">{props.message}</p>
         </div>
+        
     );
 };
 
