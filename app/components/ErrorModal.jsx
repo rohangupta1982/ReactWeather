@@ -1,4 +1,6 @@
 var React = require('react');
+var ReactDOM = require('react-dom');
+var ReactDOMServer = require('react-dom/server');
 
 var ErrorModal = React.createClass({
     getDefaultProps: function() {
@@ -11,17 +13,28 @@ var ErrorModal = React.createClass({
         errorMessage: React.PropTypes.string.isRequired
     },
     componentDidMount: function() {
-        var modal = new Foundation.Reveal($('#errorModal'));
-        modal.open();
-    },
-    render: function() {
-        var {title,errorMessage} = this.props;
+        if($('.reveal-overlay').length > 0) {
+            $('.reveal-overlay').remove();
+        }
         
-        return(
+        var {title,errorMessage} = this.props;
+        var modalMarkup = (
             <div ref="errorModal" id="errorModal" className="reveal tiny text-center" data-reveal="">
                 <h4>{title}</h4>
                 <p>{errorMessage}</p>
                 <p><button className="button hollow" data-close="">Okay</button></p>
+            </div>
+        );
+        
+        var $modal = $(ReactDOMServer.renderToString(modalMarkup));
+        $(ReactDOM.findDOMNode(this)).html($modal);
+        
+        var modal = new Foundation.Reveal($('#errorModal'));
+        modal.open();
+    },
+    render: function() {
+        return(
+            <div>
             </div>
         );
     }

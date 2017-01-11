@@ -7,7 +7,7 @@ var ErrorModal = require('ErrorModal');
 var Weather = React.createClass({
     getDefaultProps: function() {
         return({
-            message: ''
+            message: undefined
         });
     },
     getInitialState: function() {
@@ -23,16 +23,30 @@ var Weather = React.createClass({
             message = `The temperature in ${location} is ${temperature}\xB0F`;
             this.setState({
                 message: message,
-                errorMessage: ''
+                errorMessage: undefined
             });
         }, (e) => {
             message = e.message;
             var state = this.state;
             this.setState({
-                message: '',
+                message: undefined,
                 errorMessage: message
             });
         });
+    },
+    handleOutOfComponentSearch: function(location) {
+        var location = location;
+        
+        if(typeof location === 'string' && location.length > 0) {
+            this.handleSearch(location);
+            window.location.hash = '/';
+        }
+    },
+    componentDidMount: function() {
+        this.handleOutOfComponentSearch(this.props.location.query.location);
+    },
+    componentWillReceiveProps: function(newProps) {
+        this.handleOutOfComponentSearch(newProps.location.query.location);
     },
     render: function() {
         var {errorMessage} = this.state;

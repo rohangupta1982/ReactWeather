@@ -29,8 +29,14 @@ var {Link, IndexLink} = require('react-router');
 
 //Third
 var Navigator = React.createClass({
-    login: function(e) {
+    getWeather: function(e) {
         e.preventDefault();
+        var location = this.refs.location.value;
+        
+        if(typeof location === 'string' && location.length > 0) {
+            window.location.hash = `/?location=${location}`;
+            this.refs.location.value = '';
+        }
     },
     render: function() {
         return(

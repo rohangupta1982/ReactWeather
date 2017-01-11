@@ -3,6 +3,7 @@ var React = require('react');
 var WeatherForm = React.createClass({
     getWeather: function(e) {
         e.preventDefault();
+        
         var location = this.refs.location.value;
         
         if(typeof location === 'string' && location.length > 0) {
